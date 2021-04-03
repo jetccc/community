@@ -1,0 +1,41 @@
+#访问端口号
+server:
+  port: 8080
+
+#关闭thymeleaf缓存  上线后可以开启，降低服务器压力
+spring:
+  thymeleaf:
+    cache: false
+  #数据库相关配置
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    type: com.zaxxer.hikari.HikariDataSource
+    hikari:
+      username: root
+      password: root
+      maximum-pool-size: 15
+      minimum-idle: 5
+      idle-timeout: 30000
+    url: jdbc:mysql://localhost:3306/community?useUnicode=true&characterEncoding=utf8&serverTimezone=Asia/Shanghai
+
+
+#MybatisProperties
+mybatis:
+  #mybatis的配置文件的路径配置
+  mapper-locations: classpath:mapper/*.xml
+  #指定entity扫描包类让mybatis自定扫描到自定义的entity
+  type-aliases-package: com.acg.community.entity
+  configuration:
+    #往MySQL数据库中插入一条记录后，返回该条记录的自增主键值。
+    use-generated-keys: true
+    #开启驼峰功能 如：数据库表列：user_name 实体类属性：userName
+    map-underscore-to-camel-case: true
+
+#pagehelper配置
+pagehelper:
+  # 选择数据库类型
+  helper-dialect: mysql
+  #是否开启合理化分页
+  reasonable: true
+
+
